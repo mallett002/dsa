@@ -18,7 +18,7 @@ def max_area(heights):
         height = min(heights[left], heights[right])
         area = width * height
 
-        current_max_area = max(curr_max_area, area) # 16
+        current_max_area = max(curr_max_area, area)
 
         # if left wall smaller than right wall, move left wall up.
         # Find the smaller height (since that determines the top of the water)
