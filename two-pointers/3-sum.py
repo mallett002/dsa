@@ -19,6 +19,7 @@ def three_sum(nums):
         if (i > 0) and nums[i] == nums[i - 1]:
             continue
 
+        # initiate 2 pointers in relation to "i"
         left = i + 1
         right = len(nums) - 1
 
