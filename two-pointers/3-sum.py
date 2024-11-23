@@ -19,7 +19,6 @@ def three_sum(nums):
         if (i > 0) and nums[i] == nums[i - 1]:
             continue
 
-        # initiate 2 pointers in relation to "i"
         left = i + 1
         right = len(nums) - 1
 
@@ -27,25 +26,27 @@ def three_sum(nums):
             net = nums[i] + nums[left] + nums[right]
 
             if net < 0: # try to make it closer to zero (move left up)
-                left += left
+                left += 1
 
             elif net > 0: # try to make it closer to zero (move right back)
-                right -= right
-            
-            else: # found a combo!
-                # put combo in result
+                right -= 1
+
+            else:
+                # Found a combo that nets to 0
                 result.append([nums[i], nums[left], nums[right]])
 
-                # look for last left & rights w/ same vals as combo
+                # go to last left position with the same val
                 while left < right and nums[left] == nums[left + 1]:
                     left += 1
+
+                # go to last right position with the same val
                 while left < right and nums[right] == nums[right - 1]:
                     right -= 1
                 
+                # move left and right (puts them at next pos with different values than had before)
                 left += 1
                 right -= 1
 
     return result
-
 
 print(three_sum([-1,0,1,2,-1,-1]))
