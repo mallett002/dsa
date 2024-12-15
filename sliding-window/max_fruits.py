@@ -59,3 +59,23 @@ print(result)
 
 
 
+
+# Sliding window template
+def sliding_window(items):
+    start = 0
+    state = {}
+    max_count = 0
+
+    for end in range(len(items)):
+
+        # while state is not valid
+        # while some case that makes it not valid
+            start += 1
+            # update state accordingly
+    
+        # state is now valid
+        # update max_count accordingly
+        # max_count = max(max_count, end - start + 1)
+
+    return max_count
+
