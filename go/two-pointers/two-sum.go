@@ -3,36 +3,28 @@ package main
 import "fmt"
 
 func main() {
-	var input [7]uint8 = [7]uint8{1, 3, 4, 6, 8, 10, 13}
+	var nums [7]uint8 = [7]uint8{1, 3, 4, 6, 8, 10, 13}
 	var target uint8 = 13
 
-	res := twoSum(input[:], target)
+	res := twoSum(nums[:], target)
 
 	fmt.Printf("\n%v", res)
 }
 
-func twoSum(input []uint8, target uint8) bool {
-	var left uint8 = 0
-	var right uint8 = uint8(len(input) - 1)
+func twoSum(nums []uint8, target uint8) bool {
+	left := 0
+	right := len(nums) - 1
 
-	for left != right {
-		leftNum := input[left]
-		rightNum := input[right]
-
-		sum := leftNum + rightNum
+	for left < right {
+		sum := nums[left] + nums[right]
+		fmt.Printf("sum %v", sum)
 
 		if sum == target {
 			return true
-		}
-
-		if sum > target {
+		} else if sum > target {
 			right--
-		} else if sum < target {
+		} else {
 			left++
-		}
-
-		if left == right {
-			break
 		}
 	}
 
