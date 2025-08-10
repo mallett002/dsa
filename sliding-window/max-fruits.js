@@ -75,3 +75,57 @@ function again(fruits) {
 
 
 console.log('again:', again([3, 3, 2, 1, 2, 1, 0]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// longest subarray with only 2 diff types of fruits
+// let start = 0; state = 0; max = 0;
+//
+// for let end = 0
+//   increment state for fruit at state[end]      
+//
+//   while window not valid
+//     move up start
+//     handle state for start
+//
+//   set new max
+//
+// return max
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
