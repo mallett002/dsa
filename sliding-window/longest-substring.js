@@ -11,45 +11,26 @@
 //
 //  return state
 
-/*
-  {}
-*/
-
-
-function longestSubstringWithoutRepeat(str) {
+function longestSubstrintWithoutRepeat(str) {
     let start = 0;
-    let longest = 0;
-    const chars = [];
+    let charCount = {}; // # times char appears in window
+    let max = 0;
 
     for (let end = 0; end < str.length; end++) {
-        chars.push(str[end]);
-
-        // valid if every char is unique
-        let isValid = new Set(chars).size === ( end - start ) + 1;
-
-        while (!isValid) {
-            // rm from state
-            chars.shift();
+        charCount[str[end]] = (charCount[str[end]] ?? 0) + 1; // update the charCount
+        
+        // if not valid: move up start and handle its state
+        while (charCount[str[end]] > 1) {
+            // update start's state:
+            charCount[str[start]]--;
+            // move up start
             start++;
-
-            isValid = new Set(chars).size === ( end - start ) + 1;
         }
 
-        longest = Math.max(longest, (end - start) + 1);
+        max = Math.max(max, (end - start) + 1);
     }
 
-    return longest;
+    return max;
 }
 
-
-console.log(longestSubstringWithoutRepeat('substring'));
-
-//const it = new Set();
-
-//it.add('b');
-//
-//console.log(it);
-//
-//it.delete('a');
-//
-//console.log(it)
+console.log(longestSubstrintWithoutRepeat('eghghhgg'))
