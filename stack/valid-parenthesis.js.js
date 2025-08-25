@@ -11,8 +11,7 @@ Approach:
 - if not opening brace:
     - If top of stack isn't curr char's match return false (found that this string ins't valid)
     - Else found its match. Remove from the stack and continue
-
-
+- if at the end the stack is empty, we found all the matches so it's a valid string
 
 
 Example
@@ -25,36 +24,30 @@ Output: false
 
  */
 
-// First attempt:
-function isValid(str) {
-    const charMap = {
-        ")": "(",
-        "}": "{",
-        "]": "[",
-    };
-
+function isValidString(str) {
+    const mapping = { ')': '(', '}': '{', ']': '[' };
     const stack = [];
 
-    for (let i = 0; i < str.length; i++) {
-        const currChar = str[i];
-
-        if (charMap[currChar]) {
-            // it's a closing bracket
-            if (stack.pop() !== charMap[currChar]) {
+    for (const char of str) {
+        if (char in mapping) {
+            if (!stack.length || stack[stack.length -1] !== mapping[char]) {
                 return false;
             }
+
+            // found match - rm from stack
+            stack.pop();
+
         } else {
-            // it's an opening bracket
-            stack.push(currChar);
+           stack.push(char); 
         }
+        
     }
 
-    return !stack.length;
+    // if we have cleared the stack we found a match for everything ~ valid string
+    return stack.length === 0;
 }
 
-
-
-console.log(`Expected true; Got: ${isValid("(){({})}")}`);
-console.log(`Expected false; Got: ${isValid("(){({}})")}`);
+console.log(`Expected true; Got: ${isValidString("(){({})}")}`);
+console.log(`Expected false; Got: ${isValidString("(){({}})")}`);
 
 
