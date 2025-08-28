@@ -34,3 +34,4 @@ head.next.next.next = new ListNode(4);
 
 console.log(findLength(head));
 
+module.exports = { ListNode };
