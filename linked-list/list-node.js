@@ -1,4 +1,7 @@
 class ListNode {
+    val = null;
+    next = null;
+
     constructor(val, next = null) {
         this.val = val;
         this.next = next;
@@ -23,6 +26,15 @@ function findLength(head) {
     return count;
 }
 
+function printList(head) {
+    let curr = head;
+
+    while (curr) {
+        curr.print();
+        curr = curr.next;
+    }
+}
+
 
 
 const head = new ListNode(1);
@@ -32,6 +44,6 @@ head.next.next.next = new ListNode(4);
 //head.next.next?.print();
 
 
-console.log(findLength(head));
+//console.log(findLength(head));
 
-module.exports = { ListNode };
+module.exports = { ListNode, printList };
