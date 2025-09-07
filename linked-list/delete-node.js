@@ -33,7 +33,7 @@ head.next.next.next = new ListNode(4);
 function deleteNodeWithTarget(head, targetVal) {
     let curr = head;
 
-    // if head is the target, just unlink it:
+    // if head is the target, just unlink it (first node)
     if (curr.val === targetVal) {
         curr.next = null;
     }
@@ -56,6 +56,94 @@ function deleteNodeWithTarget(head, targetVal) {
     console.log('Finished!');
 }
 
-deleteNodeWithTarget(head, 4);
+//deleteNodeWithTarget(head, 4);
+
+//printList(head);
+
+// if head is target, just return next's head (essentially skips it)
+// while current node has a value
+//      if it's the target, point prev's next to curr's next (skips it in the chain)
+//      move curr along: prev is now curr and curr is now next
+// return head
+function deleteNodeAnswer(head, target) {
+    if (head.value === target) return head.next;
+
+    let prev = null;
+    let curr = head;
+
+    while (curr) {
+        if (curr.val === target) {
+            prev.next = curr.next; // skip curr in the chain
+            break;
+        }
+
+        // move it along
+        prev = curr;
+        curr = curr.next;
+    }
+
+    return head;
+}
+
+//deleteNodeAnswer(head, 4);
+//
+//printList(head);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function takeThree() {
+
+}
+
+
+takeThree(head, 4);
 
 printList(head);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
