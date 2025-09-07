@@ -66,7 +66,7 @@ function deleteNodeWithTarget(head, targetVal) {
 //      move curr along: prev is now curr and curr is now next
 // return head
 function deleteNodeAnswer(head, target) {
-    if (head.value === target) return head.next;
+    if (head.val === target) return head.next;
 
     let prev = null;
     let curr = head;
@@ -85,65 +85,6 @@ function deleteNodeAnswer(head, target) {
     return head;
 }
 
-//deleteNodeAnswer(head, 4);
-//
-//printList(head);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function takeThree() {
-
-}
-
-
-takeThree(head, 4);
-
+deleteNodeAnswer(head, 4);
 printList(head);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
