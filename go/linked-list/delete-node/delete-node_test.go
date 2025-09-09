@@ -27,27 +27,6 @@ func TestCountNode(t *testing.T) {
 	}
 }
 
-func TestDeleteNode(t *testing.T) {
-	// given
-	head := createList()
-
-	// when
-	newHead := DeleteNode(head, 2)
-	count := CountNodes(newHead)
-	printedList := PrintList(newHead)
-
-	// then
-	if count != 3 {
-		t.Errorf("Incorrect. Expected %d but got %d", 3, count)
-	}
-
-	exptectedList := "1 -> 3 -> 4"
-
-	if printedList != exptectedList {
-		t.Errorf("Incorrect. Expected %s but got %s", exptectedList, printedList)
-	}
-}
-
 func TestDeleteNode2(t *testing.T) {
 	var tests = []struct {
 		name     string
