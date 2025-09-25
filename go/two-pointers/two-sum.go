@@ -11,12 +11,12 @@ func main() {
 	fmt.Printf("\n%v", res)
 }
 
-func twoSum(nums []uint8, target uint8) bool {
+func twoSum(sortedNums []uint8, target uint8) bool {
 	left := 0
-	right := len(nums) - 1
+	right := len(sortedNums) - 1
 
 	for left < right {
-		sum := nums[left] + nums[right]
+		sum := sortedNums[left] + sortedNums[right]
 		fmt.Printf("sum %v", sum)
 
 		if sum == target {
