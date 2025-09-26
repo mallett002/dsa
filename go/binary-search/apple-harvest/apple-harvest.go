@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "fmt"
+	"fmt"
 	"math"
 )
 
@@ -57,7 +57,7 @@ func timeTakes(trees []int, rate int) int {
 	return hours
 }
 
-func AppleHarvest(apples []int, hours int) int {
+func AppleHarvestBruteForce(apples []int, hours int) int {
 	rate := 1
 
 	for timeTakes(apples, rate) > hours {
@@ -73,11 +73,10 @@ func AppleHarvest(apples []int, hours int) int {
 // apples/hr:
 // 1, 2, 3, 4, 5, 6, 7 (most is 7, larget tree)
 
-// 1:
 // left: 0;
 // right: len - 1;
 // mid: index 4 (val 4)
-//		     x
+
 // [1, 2, 3, 4, 5, 6, 7]
 // 4app/hr -> 1, 2, 2: 5hrs VALID
 // eliminate all greater (right mid + 1)
@@ -100,3 +99,47 @@ func AppleHarvest(apples []int, hours int) int {
 // [3]
 
 // if left === right return apples[left]
+
+func AppleHarvest(trees []int, hours int) int {
+	fmt.Println("starting")
+	// Build potential hrs list
+	var potentialHrs []int
+
+	for i := 1; i < hours; i++ {
+		potentialHrs = append(potentialHrs, i)
+	}
+
+	left := 0
+	right := len(potentialHrs) - 1
+
+	// if left == right, we found it (i think)
+	for left != right {
+		// Get mid
+		mid := (right + left) / 2
+
+		rate := potentialHrs[mid]
+		fmt.Printf("mid %d", rate)
+
+		// determine time taken
+
+		totalTimeForRate := 0
+
+		for _, tree := range trees {
+			totalTimeForRate += ceilDivide(tree, rate)
+		}
+
+		fmt.Printf("takes %d hrs\n", totalTimeForRate)
+
+		var isValid bool = totalTimeForRate <= hours
+
+		if isValid {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+
+		// left = right careful here
+	}
+
+	return potentialHrs[left]
+}
