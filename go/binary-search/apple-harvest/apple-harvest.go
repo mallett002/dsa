@@ -20,6 +20,10 @@ Ex:
 Input: applesPerTree, hours
 Find slowest rate of apples/hr Bobby can harvest and still complete all trees in "hours" hours
 
+
+************** GO TO BOTTOM FOR BINARY SEARCH APPROACH ***************************
+
+
 Ex: [3,6,7] 8
 
 1? 3,6,7: 16hrs
@@ -67,38 +71,40 @@ func AppleHarvestBruteForce(apples []int, hours int) int {
 	return rate
 }
 
-// Binary search approach -------------------------
-// Ex: [3,6,7] 8
+/* Binary search approach -------------------------
+Ex: [3,6,7] 8
 
-// apples/hr:
-// 1, 2, 3, 4, 5, 6, 7 (most is 7, larget tree)
+apples/hr:
+1, 2, 3, 4, 5, 6, 7 (most is 7, larget tree)
 
-// left: 0;
-// right: len - 1;
-// mid: index 4 (val 4)
+left: 0;
+right: len - 1;
+mid: index 3 (val 4)
 
-// [1, 2, 3, 4, 5, 6, 7]
-// 4app/hr -> 1, 2, 2: 5hrs VALID
-// eliminate all greater (right mid + 1)
-// [1, 2, 3, 4, 5]
+l         m        r
+[1, 2, 3, 4, 5, 6, 7]
+4app/hr -> 1, 2, 2: 5hrs VALID
+eliminate all greater than index 3 (right mid + 1)
+l         r
+[1, 2, 3, 4, 5, 6, 7]
 
-// 2: new mid
-//        x
-// [1, 2, 3, 4, 5]
-// 3app/hr -> 1, 2, 3: (5hrs VALID)
-// eliminate all greater (right mid + 1)
-// [1, 2, 3 ]
+mid = index 1 (2)
+ l  m     r
+[1, 2, 3, 4, 5, 6, 7]
+2app/hr -> 2,3,4: 9hrs
+9hrs <= 8? FALSE -> NOT VALID
+not valid -> left = mid + 1
 
-// 3: new mid
-//     x
-// [1, 2, 3]
-// 2app/hr -> 2, 3, 4: (9 hrs: not valid)
-// eliminate mid and less (left mid + 1)
+       m
+       l  r
+[1, 2, 3, 4, 5, 6, 7]
+3app/hr -> 1,2,3: 6hrs
+6hrs <= 8? TRUE -> VALID
+valid -> r = m
+l == r ? true -> found it
 
-// new mid
-// [3]
+*/
 
-// if left === right return apples[left]
 func findLargest(trees []int) int {
 	largest := trees[0]
 
