@@ -22,17 +22,17 @@ func TestAppleHarvest(t *testing.T) {
 			},
 			expected: 3,
 		},
-		// {
-		// 	name: "with {25, 9, 23, 8, 3} in 5 hours, Bobby can do 25 apples/hr",
-		// 	input: struct {
-		// 		trees []int
-		// 		hours int
-		// 	}{
-		// 		trees: []int{25, 9, 23, 8, 3},
-		// 		hours: 5,
-		// 	},
-		// 	expected: 25,
-		// },
+		{
+			name: "with {25, 9, 23, 8, 3} in 5 hours, Bobby can do 25 apples/hr",
+			input: struct {
+				trees []int
+				hours int
+			}{
+				trees: []int{25, 9, 23, 8, 3},
+				hours: 5,
+			},
+			expected: 25,
+		},
 	}
 
 	for _, tc := range cases {

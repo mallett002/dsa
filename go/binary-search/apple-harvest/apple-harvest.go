@@ -99,36 +99,47 @@ func AppleHarvestBruteForce(apples []int, hours int) int {
 // [3]
 
 // if left === right return apples[left]
+func findLargest(trees []int) int {
+	largest := trees[0]
+
+	for i := 1; i < len(trees); i++ {
+		if trees[i] > largest {
+			largest = trees[i]
+		}
+	}
+
+	return largest
+}
 
 func AppleHarvest(trees []int, hours int) int {
-	fmt.Println("starting")
 	// Build potential hrs list
 	var potentialHrs []int
+	var treeWithMostApples int = findLargest(trees)
 
-	for i := 1; i < hours; i++ {
+	for i := 1; i <= treeWithMostApples; i++ {
 		potentialHrs = append(potentialHrs, i)
 	}
 
+	fmt.Printf("Potential hours %v\n", potentialHrs)
+
+	// start left and right pointers
 	left := 0
 	right := len(potentialHrs) - 1
 
-	// if left == right, we found it (i think)
+	// Binary search for lowest valid value
 	for left != right {
 		// Get mid
 		mid := (right + left) / 2
 
+		// determine total time for rate at mid
 		rate := potentialHrs[mid]
-		fmt.Printf("mid %d", rate)
-
-		// determine time taken
-
 		totalTimeForRate := 0
 
 		for _, tree := range trees {
 			totalTimeForRate += ceilDivide(tree, rate)
 		}
 
-		fmt.Printf("takes %d hrs\n", totalTimeForRate)
+		fmt.Printf("mid %d (%d) takes %d hrs\n", mid, potentialHrs[mid], totalTimeForRate)
 
 		var isValid bool = totalTimeForRate <= hours
 
@@ -137,8 +148,6 @@ func AppleHarvest(trees []int, hours int) int {
 		} else {
 			left = mid + 1
 		}
-
-		// left = right careful here
 	}
 
 	return potentialHrs[left]
