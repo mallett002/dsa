@@ -21,3 +21,7 @@ func TestBubbleUp(t *testing.T) {
 		t.Errorf("FAIL: Expected %v; Received %v", expected, items)
 	}
 }
+
+func TestPush(t *testing.T) {
+
+}

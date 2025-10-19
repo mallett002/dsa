@@ -93,3 +93,33 @@ func Push(item int, items []int) {
 
 	BubbleUp(items, len(items)-1)
 }
+
+// Put methods on the heap interface:
+type MinHeap struct {
+	items []int
+}
+
+func (h *MinHeap) Push(item int) {
+	h.items = append(h.items, item)
+	h.bubbleUp(len(h.items) - 1)
+}
+
+func (h *MinHeap) bubbleUp(index int) {
+	// if reached the root, return, it's good
+	if index == 0 {
+		return
+	}
+
+	parentIndex := (index - 1) / 2
+
+	// If child greater than parent, return, it's good
+	if h.items[index] >= h.items[parentIndex] {
+		return
+	}
+
+	// swap
+	h.items[parentIndex], h.items[index] = h.items[index], h.items[parentIndex] // in go you don't need a temp
+
+	// keep going
+	h.bubbleUp(parentIndex)
+}
