@@ -86,14 +86,6 @@ func BubbleUp(items []int, index int) {
 	BubbleUp(items, parentIndex)
 }
 
-func Push(item int, items []int) {
-	// add item to end of list
-	// min heap: if less than parent, swap it with parent. keep doing until greater than parent or reach root node
-	items = append(items, item)
-
-	BubbleUp(items, len(items)-1)
-}
-
 // Put methods on the heap interface:
 type MinHeap struct {
 	items []int
@@ -122,4 +114,134 @@ func (h *MinHeap) bubbleUp(index int) {
 
 	// keep going
 	h.bubbleUp(parentIndex)
+}
+
+func indexWithSmallestValue(items []int, one int, two int) int {
+	if items[one] < items[two] {
+		return one
+	}
+
+	return two
+}
+
+func (h *MinHeap) heapIndexWithSmallestValue(one int, two int) int {
+	if h.items[one] < h.items[two] {
+		return one
+	}
+
+	return two
+}
+
+func (h *MinHeap) Pop() {
+	// put end at root
+	h.items[0] = h.items[len(h.items)-1]
+	h.items = h.items[:len(h.items)-1]
+	// bubble down: if greater than a child, swap with smallest child. keep going until valid heap
+
+	if h.items[0] > h.items[1] || h.items[0] > h.items[2] {
+		smallest := indexWithSmallestValue(h.items, 1, 2)
+
+		// swap
+		h.items[0], h.items[smallest] = h.items[smallest], h.items[0]
+	}
+
+	/*
+	   start:
+
+	   	       1
+	   	   2       3
+	   	4    8   9   4
+
+	   swap:
+
+	   	       4
+	   	   2       3
+	   	4    8   9
+
+	   bubble down:
+
+	   	       2
+	   	   4       3
+	   	4    8   9
+	*/
+}
+
+// What AI did for pop:
+func (h *MinHeap) PopAI() {
+	if len(h.items) == 0 {
+		panic("cannot pop from empty heap")
+	}
+
+	// Save the smallest element
+	// root := h.items[0]
+
+	// Move the last element to the root and shrink the slice
+	lastIndex := len(h.items) - 1
+	h.items[0] = h.items[lastIndex] // move the last item to the root
+	h.items = h.items[:lastIndex]   // remove last item
+
+	// Bubble down to restore heap property
+	h.bubbleDownAgain(0)
+
+	// return root
+}
+
+// Helper function for bubbling down
+func (h *MinHeap) bubbleDown(index int) {
+	left := 2*index + 1
+	right := 2*index + 2
+	length := len(h.items)
+
+	smallest := index
+
+	// Compare with left child
+	if left < length && h.items[left] < h.items[smallest] {
+		smallest = left
+	}
+
+	// Compare with right child
+	if right < length && h.items[right] < h.items[smallest] {
+		smallest = right
+	}
+
+	// If the smallest is not the current index, swap and continue bubbling down
+	if smallest != index {
+		h.items[index], h.items[smallest] = h.items[smallest], h.items[index]
+		h.bubbleDown(smallest)
+	}
+}
+
+func (h *MinHeap) bubbleDownAgain(index int) {
+	/*
+	   already removed root, and put end at root
+	   if value at index is greater than left or right, swap
+	*/
+	left := (2 * index) + 1
+	right := (2 * index) + 2
+
+	// find the smallest one to swap with
+	var smallest int
+
+	if left < len(h.items) && right < len(h.items) {
+		smallest = h.heapIndexWithSmallestValue(left, right)
+	}
+
+	if left > len(h.items) && right > len(h.items) {
+		return
+	}
+
+	if left >= len(h.items) {
+		smallest = right
+	}
+
+	if right >= len(h.items) {
+		smallest = left
+	}
+
+	// if parent larger than child, swap and keep bubbling
+	if h.items[smallest] < h.items[index] {
+		// swap and then bubble down again
+		h.items[smallest], h.items[index] = h.items[index], h.items[smallest]
+		h.bubbleDownAgain(smallest)
+	}
 }
