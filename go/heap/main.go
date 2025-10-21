@@ -172,35 +172,30 @@ func (h *MinHeap) PopAI() {
 		panic("cannot pop from empty heap")
 	}
 
-	// Save the smallest element
-	// root := h.items[0]
-
 	// Move the last element to the root and shrink the slice
 	lastIndex := len(h.items) - 1
 	h.items[0] = h.items[lastIndex] // move the last item to the root
 	h.items = h.items[:lastIndex]   // remove last item
 
 	// Bubble down to restore heap property
-	h.bubbleDownAgain(0)
-
-	// return root
+	h.bubbleDown(0)
 }
 
-// Helper function for bubbling down
 func (h *MinHeap) bubbleDown(index int) {
 	left := 2*index + 1
 	right := 2*index + 2
-	length := len(h.items)
 
+	// compare parent & 2 children to determine which is smallest
+	// if the smallest is a child, swap parent with that child
 	smallest := index
 
 	// Compare with left child
-	if left < length && h.items[left] < h.items[smallest] {
+	if left < len(h.items) && h.items[left] < h.items[smallest] {
 		smallest = left
 	}
 
 	// Compare with right child
-	if right < length && h.items[right] < h.items[smallest] {
+	if right < len(h.items) && h.items[right] < h.items[smallest] {
 		smallest = right
 	}
 
@@ -208,40 +203,5 @@ func (h *MinHeap) bubbleDown(index int) {
 	if smallest != index {
 		h.items[index], h.items[smallest] = h.items[smallest], h.items[index]
 		h.bubbleDown(smallest)
-	}
-}
-
-func (h *MinHeap) bubbleDownAgain(index int) {
-	/*
-	   already removed root, and put end at root
-	   if value at index is greater than left or right, swap
-	*/
-	left := (2 * index) + 1
-	right := (2 * index) + 2
-
-	// find the smallest one to swap with
-	var smallest int
-
-	if left < len(h.items) && right < len(h.items) {
-		smallest = h.heapIndexWithSmallestValue(left, right)
-	}
-
-	if left > len(h.items) && right > len(h.items) {
-		return
-	}
-
-	if left >= len(h.items) {
-		smallest = right
-	}
-
-	if right >= len(h.items) {
-		smallest = left
-	}
-
-	// if parent larger than child, swap and keep bubbling
-	if h.items[smallest] < h.items[index] {
-		// swap and then bubble down again
-		h.items[smallest], h.items[index] = h.items[index], h.items[smallest]
-		h.bubbleDownAgain(smallest)
 	}
 }
