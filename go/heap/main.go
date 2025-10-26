@@ -157,3 +157,7 @@ func (h *MinHeap) bubbleDown(parentIndex int) {
 	h.items[parentIndex], h.items[smallest] = h.items[smallest], h.items[parentIndex]
 	h.bubbleDown(smallest)
 }
+
+func (h *MinHeap) Peek() int {
+	return h.items[0]
+}

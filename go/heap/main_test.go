@@ -68,3 +68,15 @@ func TestPop(t *testing.T) {
 		t.Errorf("FAIL: Expected %v; Received %v", expected, heap.items)
 	}
 }
+
+func TestPeek(t *testing.T) {
+	var heap MinHeap = MinHeap{items: []int{1, 3, 2, 7, 8, 4, 9}}
+
+	result := heap.Peek()
+
+	expected := 1
+
+	if result != expected {
+		t.Errorf("FAIL: Expected %d; Received %d", expected, result)
+	}
+}
