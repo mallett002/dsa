@@ -116,58 +116,7 @@ func (h *MinHeap) bubbleUp(index int) {
 	h.bubbleUp(parentIndex)
 }
 
-func indexWithSmallestValue(items []int, one int, two int) int {
-	if items[one] < items[two] {
-		return one
-	}
-
-	return two
-}
-
-func (h *MinHeap) heapIndexWithSmallestValue(one int, two int) int {
-	if h.items[one] < h.items[two] {
-		return one
-	}
-
-	return two
-}
-
 func (h *MinHeap) Pop() {
-	// put end at root
-	h.items[0] = h.items[len(h.items)-1]
-	h.items = h.items[:len(h.items)-1]
-	// bubble down: if greater than a child, swap with smallest child. keep going until valid heap
-
-	if h.items[0] > h.items[1] || h.items[0] > h.items[2] {
-		smallest := indexWithSmallestValue(h.items, 1, 2)
-
-		// swap
-		h.items[0], h.items[smallest] = h.items[smallest], h.items[0]
-	}
-
-	/*
-	   start:
-
-	   	       1
-	   	   2       3
-	   	4    8   9   4
-
-	   swap:
-
-	   	       4
-	   	   2       3
-	   	4    8   9
-
-	   bubble down:
-
-	   	       2
-	   	   4       3
-	   	4    8   9
-	*/
-}
-
-// What AI did for pop:
-func (h *MinHeap) PopAI() {
 	if len(h.items) == 0 {
 		panic("cannot pop from empty heap")
 	}
@@ -181,13 +130,13 @@ func (h *MinHeap) PopAI() {
 	h.bubbleDown(0)
 }
 
-func (h *MinHeap) bubbleDown(index int) {
-	left := 2*index + 1
-	right := 2*index + 2
+func (h *MinHeap) bubbleDown(parentIndex int) {
+	left := 2*parentIndex + 1
+	right := 2*parentIndex + 2
 
 	// compare parent & 2 children to determine which is smallest
 	// if the smallest is a child, swap parent with that child
-	smallest := index
+	smallest := parentIndex
 
 	// Compare with left child
 	if left < len(h.items) && h.items[left] < h.items[smallest] {
@@ -199,9 +148,12 @@ func (h *MinHeap) bubbleDown(index int) {
 		smallest = right
 	}
 
-	// If the smallest is not the current index, swap and continue bubbling down
-	if smallest != index {
-		h.items[index], h.items[smallest] = h.items[smallest], h.items[index]
-		h.bubbleDown(smallest)
+	// If the smallest is parentIndex, we're done
+	if smallest == parentIndex {
+		return
 	}
+
+	// parent wasn't the smallest, swap with smallest and keep bubbling down
+	h.items[parentIndex], h.items[smallest] = h.items[smallest], h.items[parentIndex]
+	h.bubbleDown(smallest)
 }

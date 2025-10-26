@@ -60,7 +60,7 @@ func TestPop(t *testing.T) {
 
 	*/
 
-	heap.PopAI()
+	heap.Pop()
 
 	expected := []int{2, 3, 4, 7, 8, 9}
 
