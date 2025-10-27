@@ -80,3 +80,35 @@ func TestPeek(t *testing.T) {
 		t.Errorf("FAIL: Expected %d; Received %d", expected, result)
 	}
 }
+
+func TestHeapify(t *testing.T) {
+	/*
+	   Start with an invalid heap:
+	           4
+	       6       9
+	    3    2  8    3
+
+	   step 1: handle last non-leaf node (swap 9 & 3)
+	           4
+	       6       3
+	    3    2  8    9
+
+	   step 2: move to previous non-leaf node and repeat until root of tree reached
+	   - replace 6 & 2
+	           4
+	       2       3
+	    3    6   8    9
+
+	   - replace 2 & 4
+	           2
+	       4       3
+	    3    6   8    9
+
+	   step 3: ensure valid heap (replace 4 & 3)
+	           2
+	       3       3
+	    4    6   8    9
+
+	*/
+
+}
