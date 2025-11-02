@@ -4,32 +4,7 @@ import (
 	"container/heap"
 )
 
-type IntHeap []int
-
-func (h IntHeap) Len() int {
-	return len(h)
-}
-
-func (h IntHeap) Less(i, j int) bool {
-	return h[i] < h[j] // max heap's less ">". min heap's is "<"
-}
-
-func (h IntHeap) Swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-}
-
-// Push and Pop use pointer receivers because they modify the slice's length, not just its contents.
-func (h *IntHeap) Push(x any) {
-	*h = append(*h, x.(int)) // assert that x is an int at runtime (panics if isn't)
-}
-
-func (h *IntHeap) Pop() any {
-	n := len(*h)
-	x := (*h)[n-1]     // Get the last value to return at the end
-	*h = (*h)[0 : n-1] // shrink the heap, removing last item
-
-	return x // return that last val
-}
+// Uses heap setup from int-heap.go
 
 func TopThreeElements(nums []int) []int {
 	h := &IntHeap{}
