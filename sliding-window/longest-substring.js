@@ -7,9 +7,9 @@
 //          update start state
 //          increment start
 //
-//      update max
+//      update longest
 //
-//  return state
+//  return longest
 
 function longestSubstrintWithoutRepeat(str) {
     let start = 0;
