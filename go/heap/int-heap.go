@@ -5,6 +5,10 @@ import (
 	"fmt"
 )
 
+type Heap[T int] struct {
+	items []int
+}
+
 type IntHeap []int
 
 func (h IntHeap) Len() int {

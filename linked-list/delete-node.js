@@ -74,10 +74,15 @@ function deleteNodeAnswer(head, target) {
     while (curr) {
         if (curr.val === target) {
             prev.next = curr.next; // skip curr in the chain
+            // prev -> curr -> next
+            // prev -> next
             break;
         }
 
-        // move it along
+        // move it along:
+        // p -> c -> n
+        // 1 -> 2 -> 3
+        // 2 -> 3 -> 4?
         prev = curr;
         curr = curr.next;
     }
