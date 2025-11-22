@@ -8,7 +8,7 @@ func TestKthLargest(t *testing.T) {
 	arr := []int{5, 3, 2, 1, 4}
 
 	res := KthLargest(arr, 4)
-	expected := 4
+	expected := 2
 
 	if res != expected {
 		t.Errorf("FAIL: Expected %d; Received %d", expected, res)
