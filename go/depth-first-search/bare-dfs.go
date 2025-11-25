@@ -3,6 +3,7 @@ package main
 type TreeNode struct {
 	Left  *TreeNode
 	Right *TreeNode
+	Value int
 }
 
 func dfs(root *TreeNode) {
