@@ -7,7 +7,7 @@ func HasPathToTarget(node *TreeNode, target int) bool {
 
 	// at leaf, see if target matches leaf's val
 	if node.Left == nil && node.Right == nil {
-		return target == node.Value
+		return node.Value == target
 	}
 
 	// if not leaf, decrement target
