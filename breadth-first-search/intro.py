@@ -8,6 +8,7 @@ def traversal(root):
     result = []
     queue = deque([root])
 
+    # While queue has items (empty is falsey)
     while queue:
         current_node = queue.popleft()
         result.append(current_node.val)
