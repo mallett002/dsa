@@ -10,12 +10,10 @@
 # use two-pointer technique to solve
 def three_sum(nums):
     nums.sort()
-    # [-1, -1, -1, 0, 1, 2]
 
     result = []
 
     for i in range(len(nums) - 2):
-        # if already seen this value, skip (will end up finding the same combo and we don't want duplicates)
         if (i > 0) and nums[i] == nums[i - 1]:
             continue
 
@@ -25,28 +23,25 @@ def three_sum(nums):
         while left < right:
             net = nums[i] + nums[left] + nums[right]
 
-            if net < 0: # try to make it closer to zero (move left up)
+            if net < 0:
                 left += 1
 
-            elif net > 0: # try to make it closer to zero (move right back)
+            elif net > 0:
                 right -= 1
 
             else:
-                # Found a combo that nets to 0
                 result.append([nums[i], nums[left], nums[right]])
 
-                # go to last left position with the same val
                 while left < right and nums[left] == nums[left + 1]:
                     left += 1
 
-                # go to last right position with the same val
                 while left < right and nums[right] == nums[right - 1]:
                     right -= 1
-                
-                # move left and right (puts them at next pos with different values than had before)
+
                 left += 1
                 right -= 1
 
     return result
 
-print(three_sum([-1,0,1,2,-1,-1]))
+
+print(three_sum([-1, 0, 1, 2, -1, -1]))
