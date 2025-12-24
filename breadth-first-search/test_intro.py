@@ -1,5 +1,5 @@
 from tree_node import TreeNode
-from intro import dfs
+from intro import traversal
 
 
 def test_traversal():
@@ -14,8 +14,8 @@ def test_traversal():
         TreeNode(3),
     )
 
-    assert dfs(root) == [1, 2, 3, 4, 5]
+    assert traversal(root) == [1, 2, 3, 4, 5]
 
 
 def test_empty_tree():
-    assert dfs(None) == []
+    assert traversal(None) == []

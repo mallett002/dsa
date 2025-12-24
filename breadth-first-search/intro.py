@@ -1,23 +1,21 @@
 from collections import deque
 
 
-def dfs(root):
+def traversal(root):
     if not root:
         return []
 
     result = []
-
     queue = deque([root])
 
     while queue:
-        curr_node = queue.popleft()
+        current_node = queue.popleft()
+        result.append(current_node.val)
 
-        result.append(curr_node.val)
+        if current_node.left:
+            queue.append(current_node.left)
 
-        if curr_node.left:
-            queue.append(curr_node.left)
-
-        if curr_node.right:
-            queue.append(curr_node.right)
+        if current_node.right:
+            queue.append(current_node.right)
 
     return result
