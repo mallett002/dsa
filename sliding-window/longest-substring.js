@@ -1,7 +1,7 @@
 // state, start, longest
 //
 // loop end
-//      update stte with new end
+//      update state with new end
 //
 //      while not valid
 //          update start state
