@@ -5,21 +5,22 @@
 # if make it all the way through, return true
 def can_attend_meetings(meetings):
     sorted_meetings = sorted(meetings, key=lambda m: m[0])
-    end_times = []
+    prev_end = None
 
-    for index, (start, end) in enumerate(sorted_meetings):
-        if len(end_times):
-            last_end_time = end_times[index - 1]
-
-            if start < last_end_time:
+    for (curr_start, curr_end) in sorted_meetings:
+        if prev_end:
+            if curr_start < prev_end:
                 return False
 
-        end_times.append(end)
+        prev_end = curr_end
 
     return True
 
 
 intervals = [(10, 12), (6, 9), (13, 15)]
+print(can_attend_meetings(intervals))
+
+intervals = [(1, 5), (3, 9), (6, 8)]
 print(can_attend_meetings(intervals))
 
 
