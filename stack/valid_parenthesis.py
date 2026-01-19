@@ -1,27 +1,29 @@
 def is_valid_parens(str):
-    lookup = {
-        "(": ")",
-        ")": "(",
-        "{": "}",
-        "}": "{",
-        "[": "]",
-        "]": "[",
-    }
+    lookup = {")": "(", "}": "{", "]": "["}
 
     stack = []
 
     for char in str:
-        # Is the top of the stack's pair this char?
-        # If so pop from stack
-        # else add to stack
+        if char in lookup:  # if is not an opening char
+            if len(stack) == 0 or stack[len(stack) - 1] != lookup[char]:
+                return False
 
-        if len(stack) and char == lookup[stack[0]]:
-            stack.pop(0)
+            stack.pop()
+
         else:
-            stack.insert(0, char)
+            stack.append(char)
 
     return len(stack) == 0
+    # or "return not stack"
 
 
-input = "(){({})}"
+input = "(){}"
 print(is_valid_parens(input))
+
+# loop over chars
+#   is char opening? put in stack
+#   else check stack:
+#       if nothing in stack or this char isn't the match for top of stack:
+#           return false
+#       else is match, pop from stack
+# get to end and stack empty, true
